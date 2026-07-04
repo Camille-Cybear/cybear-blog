@@ -1,11 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
-import Tag from '../../components/Tag.astro';
+import CategoryPills from '../../components/CategoryPills.astro';
 import { getPublishedPosts } from '../../lib/posts';
 
 const posts = await getPublishedPosts();
-const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
 ---
 <Base title="Blog — Cybear" description="Tous les articles de veille technologique de Cybear.">
   <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Blog</h1>
@@ -13,15 +12,9 @@ const allTags = [...new Set(posts.flatMap((post) => post.data.tags))].sort();
     {posts.length} article{posts.length > 1 ? 's' : ''} de veille — réseaux, sécurité, systèmes et autres trouvailles.
   </p>
 
-  {
-    allTags.length > 0 && (
-      <div class="mt-6 flex flex-wrap gap-2">
-        {allTags.map((tag) => (
-          <Tag name={tag} />
-        ))}
-      </div>
-    )
-  }
+  <div class="mt-6">
+    <CategoryPills />
+  </div>
 
   <div class="mt-8 grid gap-4">
     {posts.map((post) => <PostCard post={post} />)}

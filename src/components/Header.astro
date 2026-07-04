@@ -3,10 +3,12 @@ import { Image } from 'astro:assets';
 import ThemeToggle from './ThemeToggle.astro';
 import logo from '../assets/logo-cybear.png';
 
+// "Accueil" is hidden on mobile: the logo already links home.
 const navLinks = [
-  { href: '/', label: 'Accueil' },
+  { href: '/', label: 'Accueil', mobileHidden: true },
   { href: '/blog', label: 'Blog' },
   { href: '/cv', label: 'CV' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -18,9 +20,9 @@ function isActive(href: string): boolean {
 ---
 <header class="sticky top-0 z-50 border-b border-edge bg-surface/80 backdrop-blur-md">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-3 group">
+    <a href="/" class="flex items-center gap-3 group shrink-0">
       <Image src={logo} alt="" width={96} class="h-12 w-auto logo-halo" loading="eager" />
-      <span class="font-bold text-xl tracking-tight text-ink group-hover:text-accent transition-colors">
+      <span class="hidden md:block font-bold text-xl tracking-tight text-ink group-hover:text-accent transition-colors">
         cy<span class="text-accent">bear</span>.fr
       </span>
     </a>
@@ -31,7 +33,8 @@ function isActive(href: string): boolean {
           <a
             href={link.href}
             class:list={[
-              'px-4 py-2 rounded-lg text-base font-medium transition-colors',
+              'px-2.5 py-1.5 text-sm sm:px-4 sm:py-2 sm:text-base rounded-lg font-medium transition-colors',
+              link.mobileHidden ? 'hidden sm:block' : '',
               isActive(link.href)
                 ? 'text-accent bg-accent/10'
                 : 'text-soft hover:text-ink hover:bg-card',

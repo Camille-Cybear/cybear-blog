@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import CategoryPills from '../../components/CategoryPills.astro';
+import { CATEGORIES, CATEGORY_SLUGS, type CategorySlug } from '../../lib/categories';
+import { getPublishedPosts, type Post } from '../../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await getPublishedPosts();
+  return CATEGORY_SLUGS.filter((slug) => posts.some((post) => post.data.category === slug)).map(
+    (slug) => ({
+      params: { category: slug },
+      props: { posts: posts.filter((post) => post.data.category === slug) },
+    })
+  );
+}
+
+interface Props {
+  posts: Post[];
+}
+
+const category = Astro.params.category as CategorySlug;
+const { posts } = Astro.props;
+const label = CATEGORIES[category];
+---
+<Base title={`${label} — Cybear`} description={`Articles de la catégorie ${label} sur Cybear.`}>
+  <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+    Catégorie : <span class="text-accent">{label}</span>
+  </h1>
+  <p class="mt-3 text-soft">
+    {posts.length} article{posts.length > 1 ? 's' : ''} dans cette catégorie.
+  </p>
+
+  <div class="mt-6">
+    <CategoryPills current={category} />
+  </div>
+
+  <div class="mt-8 grid gap-4">
+    {posts.map((post) => <PostCard post={post} />)}
+  </div>
+</Base>

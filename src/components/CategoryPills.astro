@@ -1,0 +1,37 @@
+---
+import { CATEGORIES, CATEGORY_SLUGS, type CategorySlug } from '../lib/categories';
+import { getPublishedPosts } from '../lib/posts';
+
+interface Props {
+  current?: CategorySlug | null;
+}
+
+const { current = null } = Astro.props;
+
+const posts = await getPublishedPosts();
+const counts = new Map<CategorySlug, number>();
+for (const post of posts) {
+  counts.set(post.data.category, (counts.get(post.data.category) ?? 0) + 1);
+}
+const activeCategories = CATEGORY_SLUGS.filter((slug) => counts.has(slug));
+
+const pillBase = 'inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-medium transition-colors';
+const pillIdle = 'border border-edge bg-card text-soft hover:text-accent hover:border-accent/50';
+const pillActive = 'brand-gradient text-white';
+---
+<nav class="flex flex-wrap gap-2" aria-label="Catégories du blog">
+  <a href="/blog" class:list={[pillBase, current === null ? pillActive : pillIdle]} aria-current={current === null ? 'page' : undefined}>
+    Tous <span class="opacity-70">({posts.length})</span>
+  </a>
+  {
+    activeCategories.map((slug) => (
+      <a
+        href={`/categories/${slug}`}
+        class:list={[pillBase, current === slug ? pillActive : pillIdle]}
+        aria-current={current === slug ? 'page' : undefined}
+      >
+        {CATEGORIES[slug]} <span class="opacity-70">({counts.get(slug)})</span>
+      </a>
+    ))
+  }
+</nav>
