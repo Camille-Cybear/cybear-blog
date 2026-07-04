@@ -17,10 +17,10 @@ function isActive(href: string): boolean {
 }
 ---
 <header class="sticky top-0 z-50 border-b border-edge bg-surface/80 backdrop-blur-md">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-    <a href="/" class="flex items-center gap-2.5 group">
-      <Image src={logo} alt="" width={72} class="h-9 w-auto logo-halo" loading="eager" />
-      <span class="font-bold text-lg tracking-tight text-ink group-hover:text-accent transition-colors">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-3 group">
+      <Image src={logo} alt="" width={96} class="h-12 w-auto logo-halo" loading="eager" />
+      <span class="font-bold text-xl tracking-tight text-ink group-hover:text-accent transition-colors">
         cy<span class="text-accent">bear</span>.fr
       </span>
     </a>
@@ -31,7 +31,7 @@ function isActive(href: string): boolean {
           <a
             href={link.href}
             class:list={[
-              'px-3 py-1.5 rounded-lg text-sm font-medium transition-colors',
+              'px-4 py-2 rounded-lg text-base font-medium transition-colors',
               isActive(link.href)
                 ? 'text-accent bg-accent/10'
                 : 'text-soft hover:text-ink hover:bg-card',
@@ -47,7 +47,7 @@ function isActive(href: string): boolean {
         aria-label="Flux RSS"
         class="p-2 rounded-lg text-soft hover:text-ink hover:bg-card transition-colors"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6.18 15.64a2.18 2.18 0 012.18 2.18C8.36 19 7.38 20 6.18 20 5 20 4 19 4 17.82a2.18 2.18 0 012.18-2.18M4 4.44A15.56 15.56 0 0119.56 20h-2.83A12.73 12.73 0 004 7.27V4.44m0 5.66a9.9 9.9 0 019.9 9.9h-2.83A7.07 7.07 0 004 12.93V10.1z" />
         </svg>
       </a>
