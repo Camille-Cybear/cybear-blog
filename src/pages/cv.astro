@@ -1,0 +1,286 @@
+---
+import Base from '../layouts/Base.astro';
+
+const LINKEDIN_URL = 'https://www.linkedin.com/in/camille-bonnefoy/';
+
+const skills = [
+  {
+    domain: 'Systèmes & Réseaux',
+    items: [
+      'Windows Server / Linux (Debian), Active Directory, LDAP',
+      'TCP/IP, modèle OSI, routage, gestion de parc',
+      'Wireshark, GNS3, Cisco Packet Tracer',
+    ],
+  },
+  {
+    domain: 'Virtualisation & Conteneurs',
+    items: ['Proxmox, KVM, VirtualBox', 'Docker Compose', 'Accès distant : RDP, TightVNC, PuTTY'],
+  },
+  {
+    domain: 'Infra & Self-hosting',
+    items: [
+      'VPS Debian : Caddy, Tailscale, Uptime Kuma',
+      'Homelab : cluster Raspberry Pi 5 + switch + NAS',
+      'Supervision et administration en autonomie',
+    ],
+  },
+  {
+    domain: 'Scripting & Automatisation',
+    items: ['Bash, PowerShell', 'n8n (workflows d’automatisation)', 'Python & PHP (notions)'],
+  },
+  {
+    domain: 'Sécurité & OSINT',
+    items: [
+      'Veille cyber : SpiderFoot, SearXNG',
+      'Certification Cyber Essentials (2025)',
+      'Formation AIS visée en alternance',
+    ],
+  },
+  {
+    domain: 'Gestion de projet & Langues',
+    items: [
+      'Agile, Scrum, Kanban · specs technico-fonctionnelles',
+      '6 ans de recrutement IT : lecture fine des besoins techniques',
+      'Anglais B2/C1 · Espagnol A2',
+    ],
+  },
+];
+
+const experience = [
+  {
+    period: 'Depuis 2021',
+    role: 'Conseiller clientèle — Société Générale (CDI)',
+    detail:
+      'SG Direct (banque en ligne) depuis 2023, centre de relation client de 2021 à 2023. En parallèle : reconversion IT via Transition Pro.',
+    current: true,
+  },
+  {
+    period: '2017 — 2020',
+    role: 'Fondateur & Recruteur IT/Industrie — EVOWLVE (SASU)',
+    detail: 'Recrutement d’ingénieurs informatique, de l’administrateur systèmes & réseaux au CTO.',
+    current: false,
+  },
+  {
+    period: '2014 — 2017',
+    role: 'Recruteur IT — SILKHOM (CDI)',
+    detail: '1er salarié de l’entreprise. Recrutement d’ingénieurs informatique.',
+    current: false,
+  },
+  {
+    period: '2009 — 2012',
+    role: 'Commercial — GDF Suez (apprentissage), puis Publicis Webformance (contrat pro)',
+    detail: 'Premières expériences en alternance : prospection, relation client, vente de solutions web.',
+    current: false,
+  },
+];
+
+const education = [
+  { year: '2026', label: 'Titre professionnel TSSR (en cours) — Wild Code School, Lyon' },
+  { year: '2025', label: 'Cyber Essentials — Jedha, Lyon' },
+  { year: '2014', label: 'Master Développer & Entreprendre (niveau) — ESDES, Lyon' },
+  { year: '2012', label: 'Bachelor Développement commercial — CIEFA, Lyon' },
+  { year: '2011', label: 'BTS Négociation & Relation client — CIEFA, Lyon' },
+  { year: '2007', label: 'Baccalauréat Scientifique — Lycée Jeanne d’Arc, Gex' },
+];
+---
+<Base
+  title="CV — Camille Bonnefoy"
+  description="CV de Camille Bonnefoy — technicien systèmes et réseaux (TSSR), en recherche d'alternance Administrateur d'Infrastructures Sécurisées."
+>
+  <header class="pb-8 border-b border-edge">
+    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Camille Bonnefoy</h1>
+    <p class="mt-2 text-lg text-accent font-semibold">
+      Administrateur d’Infrastructures Sécurisées — en alternance
+    </p>
+    <p class="mt-3 text-soft max-w-2xl leading-relaxed">
+      Plus de 10 ans d’expérience, dont 6 en recrutement informatique. Aujourd’hui en
+      formation <strong class="text-ink font-semibold">TSSR à la Wild Code School (Lyon)</strong> via
+      Transition Pro, je recherche une <strong class="text-ink font-semibold">alternance d’un an
+      en Administrateur d’Infrastructures Sécurisées</strong>, avec une perspective CDI.
+      Enfin à ma place dans un domaine qui m’anime autant qu’il me fascine.
+    </p>
+    <div class="mt-5 flex flex-wrap gap-3 text-sm">
+      <span class="inline-flex items-center gap-1.5 rounded-full border border-edge bg-card px-3 py-1 text-soft">
+        📍 Lyon · mobilité AURA / PACA / Occitanie
+      </span>
+      <span class="inline-flex items-center gap-1.5 rounded-full border border-edge bg-card px-3 py-1 text-soft">
+        🎯 Alternance 1 an · perspective CDI · éligible apprentissage
+      </span>
+      <span class="inline-flex items-center gap-1.5 rounded-full border border-edge bg-card px-3 py-1 text-soft">
+        🚗 Permis B, véhiculé
+      </span>
+    </div>
+    <div class="mt-5 flex flex-wrap gap-3">
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 rounded-xl brand-gradient px-5 py-2.5 font-semibold text-white hover:brightness-110 transition-all"
+      >
+        💬 Me contacter
+      </a>
+      {
+        LINKEDIN_URL && (
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-xl border border-edge bg-card px-5 py-2.5 font-semibold hover:border-accent/50 transition-colors"
+          >
+            LinkedIn
+          </a>
+        )
+      }
+    </div>
+  </header>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-bold mb-5">Compétences</h2>
+    <div class="grid sm:grid-cols-2 gap-4">
+      {
+        skills.map((skill) => (
+          <div class="rounded-2xl border border-edge bg-card p-5">
+            <h3 class="font-bold text-accent">{skill.domain}</h3>
+            <ul class="mt-3 space-y-1.5 text-sm text-soft">
+              {skill.items.map((item) => (
+                <li class="flex gap-2">
+                  <span class="text-accent">▸</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-bold mb-5">Projets personnels IT</h2>
+    <div class="grid gap-4">
+      <div class="rounded-2xl border border-edge bg-card p-5">
+        <h3 class="font-bold text-accent">VPS d’automatisation & veille cyber/OSINT</h3>
+        <p class="mt-1 text-sm text-soft">
+          Serveur Debian administré en autonomie : conteneurs Docker derrière Caddy, accès distant
+          via Tailscale, supervision Uptime Kuma, automatisation n8n, outils OSINT (SpiderFoot, SearXNG).
+        </p>
+      </div>
+      <div class="rounded-2xl border border-edge bg-card p-5">
+        <h3 class="font-bold text-accent">Homelab — cluster Raspberry Pi 5</h3>
+        <p class="mt-1 text-sm text-soft">
+          Banc d’essai auto-hébergé (Pi 5 + switch + NAS) : virtualisation, stockage réseau
+          et premiers pas en IoT.
+        </p>
+      </div>
+      <a
+        href="https://sysbase.fr"
+        target="_blank"
+        rel="noopener"
+        class="rounded-2xl border border-edge bg-card p-5 hover:border-accent/50 transition-colors block"
+      >
+        <h3 class="font-bold text-accent">sysbase.fr</h3>
+        <p class="mt-1 text-sm text-soft">
+          Plateforme de révision multi-certifications (TSSR, AIS…) — Next.js, Tailwind, MDX.
+          Fiches, flashcards, quiz et cours chapitrés.
+        </p>
+      </a>
+      <div class="rounded-2xl border border-edge bg-card p-5">
+        <h3 class="font-bold text-accent">cybear.fr</h3>
+        <p class="mt-1 text-sm text-soft">
+          Ce site — blog de veille technologique construit avec Astro, MDX et Tailwind CSS.
+          Statique, rapide, dark mode. Sites WordPress en autogestion depuis 2007.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-bold mb-5">Expérience professionnelle</h2>
+    <ol class="relative border-l border-edge space-y-8 pl-6">
+      {
+        experience.map((job) => (
+          <li>
+            <span
+              class:list={[
+                'absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full',
+                job.current ? 'bg-accent' : 'bg-edge',
+              ]}
+            />
+            <p class="text-xs font-medium text-soft uppercase tracking-wide">{job.period}</p>
+            <h3 class="mt-1 font-bold">{job.role}</h3>
+            <p class="mt-1 text-sm text-soft">{job.detail}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-bold mb-5">Formation</h2>
+    <ul class="space-y-3">
+      {
+        education.map((item) => (
+          <li class="flex gap-4 items-baseline">
+            <span class="shrink-0 w-14 text-sm font-bold text-accent">{item.year}</span>
+            <span class="text-sm text-soft">{item.label}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section id="contact" class="mt-10 scroll-mt-24">
+    <h2 class="text-2xl font-bold mb-5">Contact</h2>
+    <div class="rounded-2xl border border-edge bg-card p-6">
+      <p class="text-sm text-soft leading-relaxed">
+        Une opportunité d’alternance, une question, un retour sur un article ?
+        Laissez-moi un message.
+      </p>
+      <!-- TODO(camille): plug a form backend (Web3Forms / Formspree / Vercel function),
+           then set the action and re-enable the submit button. -->
+      <form class="mt-5 grid gap-4" aria-describedby="contact-note">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label for="contact-name" class="block text-sm font-medium mb-1.5">Nom</label>
+            <input
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              class="w-full rounded-xl border border-edge bg-surface px-4 py-2.5 text-sm focus:outline-none focus:border-accent"
+            />
+          </div>
+          <div>
+            <label for="contact-email" class="block text-sm font-medium mb-1.5">Email</label>
+            <input
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              class="w-full rounded-xl border border-edge bg-surface px-4 py-2.5 text-sm focus:outline-none focus:border-accent"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="contact-message" class="block text-sm font-medium mb-1.5">Message</label>
+          <textarea
+            id="contact-message"
+            name="message"
+            rows="5"
+            class="w-full rounded-xl border border-edge bg-surface px-4 py-2.5 text-sm focus:outline-none focus:border-accent resize-y"
+          ></textarea>
+        </div>
+        <div class="flex items-center gap-4 flex-wrap">
+          <button
+            type="submit"
+            disabled
+            class="inline-flex items-center gap-2 rounded-xl brand-gradient px-5 py-2.5 font-semibold text-white opacity-50 cursor-not-allowed"
+          >
+            Envoyer
+          </button>
+          <p id="contact-note" class="text-xs text-soft">
+            ⏳ Formulaire en cours de mise en place — disponible très bientôt.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+</Base>

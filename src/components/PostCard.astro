@@ -1,0 +1,30 @@
+---
+import { formatDate, type Post } from '../lib/posts';
+import Tag from './Tag.astro';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+<article class="group relative rounded-2xl border border-edge bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5">
+  <time datetime={post.data.pubDate.toISOString()} class="text-xs font-medium text-soft uppercase tracking-wide">
+    {formatDate(post.data.pubDate)}
+  </time>
+  <h2 class="mt-2 text-xl font-bold leading-snug">
+    <a href={`/blog/${post.id}`} class="after:absolute after:inset-0 group-hover:text-accent transition-colors">
+      {post.data.title}
+    </a>
+  </h2>
+  <p class="mt-2 text-soft text-sm leading-relaxed">{post.data.description}</p>
+  {
+    post.data.tags.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2 relative z-10">
+        {post.data.tags.map((tag) => (
+          <Tag name={tag} />
+        ))}
+      </div>
+    )
+  }
+</article>

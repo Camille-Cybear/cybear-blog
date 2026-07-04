@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Light theme (default) — violet/magenta palette derived from the low-poly bear logo */
+:root {
+  --bg: #faf9fc;
+  --card: #ffffff;
+  --edge: #e7e5f2;
+  --ink: #1b1726;
+  --soft: #6b6880;
+  --accent: #7c3aed;
+  --accent-strong: #6d28d9;
+  --brand-from: #c026d3;
+  --brand-to: #7c3aed;
+}
+
+/* Dark theme */
+.dark {
+  --bg: #0d0b1c;
+  --card: #151230;
+  --edge: #2a2452;
+  --ink: #e9e6f7;
+  --soft: #a09ac4;
+  --accent: #a855f7;
+  --accent-strong: #c084fc;
+  --brand-from: #e879f9;
+  --brand-to: #8b5cf6;
+}
+
+@theme inline {
+  --color-surface: var(--bg);
+  --color-card: var(--card);
+  --color-edge: var(--edge);
+  --color-ink: var(--ink);
+  --color-soft: var(--soft);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-surface text-ink antialiased;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+/* Shiki dual-theme: switch code blocks to the dark palette when .dark is set */
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/* Rounded, bordered code blocks */
+.astro-code {
+  @apply rounded-xl border border-edge text-sm;
+}
+
+/* Brand gradient (magenta → violet, matches the logo) */
+.brand-gradient {
+  background-image: linear-gradient(135deg, var(--brand-from), var(--brand-to));
+}
+
+.brand-text-gradient {
+  background-image: linear-gradient(135deg, var(--brand-from), var(--brand-to));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Soft glow behind the logo so its dark facets stand out on the dark bg */
+.logo-halo {
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 55%, transparent));
+}
+
+/* Responsive YouTube embeds (astro-embed / lite-youtube) */
+lite-youtube {
+  @apply rounded-xl overflow-hidden max-w-full;
+}
