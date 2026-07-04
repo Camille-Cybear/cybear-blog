@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://cybear.fr',
+  site: 'https://www.cybear.fr',
   vite: {
     plugins: [tailwindcss()],
   },
